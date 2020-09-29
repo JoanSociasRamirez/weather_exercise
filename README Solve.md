@@ -40,7 +40,7 @@ La solución debería contener un fichero README donde se respondan estas pregun
 - ¿Qué piensas del rendimiento de la aplicación? 
 	El rendimiento de la aplicación dependerá del tiempo de respuesta de la API pública.
 - ¿Qué harías para mejorar el rendimiento si esta aplicación fuera a recibir al menos 100 peticiones por segundo?
-	Añadiría una caché o variable estática que se actulizara cada minuto/hora/día, dependiendo de la precision que requieran los resultados, con la respuestan de la API
+	Añadiría una caché o variable estática que se actulizara cada minuto/hora/día, dependiendo de la precision que requieran los resultados, con la respuesta de la API
   y que las 100 peticiones recuperaran la respuesta de esta variable para así no realizar tantas peticiones a la API.
 - ¿Cuánto tiempo has invertido para implementar la solución? 
 	 7 horas.
