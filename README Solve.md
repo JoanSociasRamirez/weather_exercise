@@ -43,7 +43,7 @@ La solución debería contener un fichero README donde se respondan estas pregun
 	Añadiría una caché o variable estática que se actulizara cada minuto/hora/día, dependiendo de la precision que requieran los resultados, con la respuestan de la API
   y que las 100 peticiones recuperaran la respuesta de esta variable para así no realizar tantas peticiones a la API.
 - ¿Cuánto tiempo has invertido para implementar la solución? 
-	Unas 7 horas.
+	 7 horas.
 - ¿Crees que en un escenario real valdría la pena dedicar tiempo a realizar esta refactorización?
   Sí, debido a que si ahora se quieren añadir nuevos atributos en City y Weahter es más sencillo de realizar y entender.
 
