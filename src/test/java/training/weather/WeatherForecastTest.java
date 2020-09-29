@@ -6,6 +6,7 @@ import java.util.Date;
 import com.google.api.client.http.javanet.NetHttpTransport;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 import org.junit.Test;
 
 import training.http.HttpClient;
@@ -36,6 +37,15 @@ public class WeatherForecastTest {
 		String rq = rf.getRequest("https://www.metaweather.com/api/location/search/?query=" + "Madrid");
 		JSONArray array = new JSONArray(rq);
 		System.out.println("CityId: " + array.getJSONObject(0).get("woeid"));	
+		assertThat(rq, instanceOf(String.class));
+	}
+
+	@Test
+	public void check_url_weather_city() throws IOException {
+		HttpClient rf = HttpClient.getInstance(new NetHttpTransport());
+		String rq = rf.getRequest("https://www.metaweather.com/api/location/" + 766273);
+		JSONArray results = new JSONObject(rq).getJSONArray("consolidated_weather");
+		System.out.println("results length: " + results.length());	
 		assertThat(rq, instanceOf(String.class));
 	}
 
