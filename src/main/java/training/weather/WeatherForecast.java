@@ -23,13 +23,13 @@ public class WeatherForecast {
 		}
 		if (datetime.before(checkDate)) {
 			HttpClient rf = HttpClient.getInstance(new NetHttpTransport());
-			String rq = rf.getRequest(getCityId(city.getName()));
+			String rq = rf.getRequest(getCityIdUrl(city.getName()));
 			JSONArray array = new JSONArray(rq);
 			try {
 				Integer wId = null;
 				wId = (Integer) array.getJSONObject(0).get("woeid");
 				city.setWId(wId);
-				rq = rf.getRequest(getWeatherCity(wId));
+				rq = rf.getRequest(getWeatherCityUrl(wId));
 				JSONArray results = new JSONObject(rq).getJSONArray("consolidated_weather");
 				for (int i = 0; i < results.length(); i++) {
 					if (new SimpleDateFormat("yyyy-MM-dd").format(datetime)
@@ -46,11 +46,11 @@ public class WeatherForecast {
 		return weather;
 	}
 
-	private String getWeatherCity(Integer cId) {
+	private String getWeatherCityUrl(Integer cId) {
 		return cityWeatherUrl + cId;
 	}
 
-	private String getCityId(String cname) {
+	private String getCityIdUrl(String cname) {
 		return cityIdUrl + cname;
 	}
 }
