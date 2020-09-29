@@ -13,6 +13,8 @@ import training.model.Weather;
 public class WeatherForecast {
 
 	private Date checkDate = new Date(new Date().getTime() + (1000 * 60 * 60 * 24 * 6));
+	private String cityIdUrl = "https://www.metaweather.com/api/location/search/?query=";
+	private String cityWeatherUrl = "https://www.metaweather.com/api/location/";
 
 	public Weather getCityWeather(City city, Date datetime) throws IOException {
 		Weather weather = new Weather();
@@ -21,13 +23,13 @@ public class WeatherForecast {
 		}
 		if (datetime.before(checkDate)) {
 			HttpClient rf = HttpClient.getInstance(new NetHttpTransport());
-			String rq = rf.getRequest("https://www.metaweather.com/api/location/search/?query=" + city.getName());
+			String rq = rf.getRequest(getCityId(city.getName()));
 			JSONArray array = new JSONArray(rq);
 			try {
 				Integer wId = null;
 				wId = (Integer) array.getJSONObject(0).get("woeid");
 				city.setWId(wId);
-				rq = rf.getRequest("https://www.metaweather.com/api/location/" + city.getWId());
+				rq = rf.getRequest(getWeatherCity(wId));
 				JSONArray results = new JSONObject(rq).getJSONArray("consolidated_weather");
 				for (int i = 0; i < results.length(); i++) {
 					if (new SimpleDateFormat("yyyy-MM-dd").format(datetime)
@@ -42,5 +44,13 @@ public class WeatherForecast {
 
 		}
 		return weather;
+	}
+
+	private String getWeatherCity(Integer cId) {
+		return cityWeatherUrl + cId;
+	}
+
+	private String getCityId(String cname) {
+		return cityIdUrl + cname;
 	}
 }
